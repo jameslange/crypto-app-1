@@ -1,0 +1,272 @@
+import React,{useState, useEffect} from 'react'
+
+
+const RenderData = (props) => {
+  //  const { getNFTBalances, data, error, isLoading, isFetching } = useNFTBalances();
+    
+    const address= "0xce90a7949bb78892f159f428d0dc23a8e3584d75";
+    const address1= "0x257453aecd1f401feb1c09882d26fbd8d8354c89"
+   
+    const[toRender, setToRender] = useState([]);
+
+    const[nfts, setNfts] = useState([]);
+
+
+ // const fetchNfts = async() => {
+        
+    //     try{
+    //         // console.log(await Web3Api.Web3API.getNFTTransfers({
+    //         //     address:"0x257453aecd1f401feb1c09882d26fbd8d8354c89"
+    //         // }))
+    //         const data = await Web3Api.account.getNFTs({
+    //         address:"0xce90a7949bb78892f159f428d0dc23a8e3584d75"
+    //         });
+    //         console.log(data)
+    //         let fixedData1 = data.result.filter(nft=> nft.hasOwnProperty("token_uri" && "metadata"))
+    //         let fixedData =  fixedData1.filter(nft => {
+    //             return nft.token_uri!==null && nft.metadata!== null && nft.metadata.name!==null && nft.metadata.description
+    //         })
+    //         setNfts(fixedData)
+    //         //console.log(nfts)
+            
+    //             } catch (e){
+    //             console.log(e);
+    //         }
+    // }  
+
+ //data.result.forEach(nft => verifyMetadata(nft))
+        // console.log(data)
+
+           //let fixedData1 = data.result.filter(nft=> nft.hasOwnProperty("token_uri" && "metadata"))
+          // console.log(fixedData1)
+          //console.log(data.result.forEach(item => item.token_uri ? null : item))
+        //   data.result.map(nft => console.log(nft.token_uri))
+        // let newArr =  data.result.map(nft => console.log(nft))
+        // console.log(newArr)
+        //   let fixedData2 = data.result.filter(nft => nft.token_uri!==null || !nft.token_uri );
+        //   console.log(fixedData2)
+        //  let fixedData3 = fixedData2.map(nft => {
+        //     if(!nft.metadata && nft.image) nft.metadata.image = nft.image;
+        //  })
+            // let test = data.result.map(nft => nft.metadata && nft.metadata.image )
+            // console.log("nft.metadata.image", test)
+            // let test4 = data.result.map(nft => nft.image )
+            // console.log("nft.image", test4)
+            // let test1 = data.result.map(nft => nft.metadata && nft.metadata.image_url )
+            // console.log("nft.metadata.image_url", test1)
+            // let test2 = data.result.map(nft => !nft.metadata && nft.token_uri )
+     
+
+        //   let newData = data.result.map(async (nft, i) => {
+                
+        //       try{ 
+        //          if(!nft.metadata){
+        //          let response = await fetch(nft.token_uri);
+        //          let data = await response.json();
+        //             //console.log("inside no metadata", data, i)
+        //         //  let newArr =  data.result.map(nft => console.log(nft.metadata))
+        //         //  console.log(newArr)
+
+
+        //          nft.metadata =  data;
+        //         //  if(nft.metadata.image_url) {
+        //         //      nft.metadata.image = nft.metadata.image_url
+        //         //      console.log(nft.metadata.image)
+        //         //  }
+               
+        //         //  nft.metadata.description = await fetch(data.description)
+        //         //  nft.metadata.name = await fetch(data.name)
+        //         //if(nft.metadata.image_url) nft.metadata.image = nft.metadata.image_url
+        //             return nft
+        //     } 
+        //       if(nft.metadata.image_url){
+        //         nft.metadata.image = nft.metadata.image_url
+        //         console.log(nft.metadata.image)
+        //         return nft;
+        //       } 
+        //       if(nft.metadata && !nft.metadata.image){
+        //       console.log("nft.metadata, no image,", nft.metadata)
+        //       }
+        //     } catch(e){console.log(e)}
+        //      return nft
+            
+        //   })
+        //   console.log('NEWDATA', newData)
+        //   let promises1= Promise.allSettled(newData)
+        //     promises1.then(results => {
+        //     console.log(results) 
+        //     return setNftBalances(results)
+        //     }).catch(e=>console.log(e))
+        //     console.log(promises1)
+
+            // promises1.then(promise => promise.map((metadata,index) => {
+            //     if(metadata) data.result[index].metadata = metadata;
+            // } ))
+            //console.log(data)
+           // console.log("nftbalances", nftBalances)
+          
+           let fixedData =  data.result.filter(nft => {
+            return nft.token_uri!==null && nft.metadata!== null 
+         })
+        // console.log(fixedData)
+              // if (url.startsWith('data:image/svg')) return url;
+      // if(!url.includes(':'))return "https://gateway.ipfs.io/ipfs/" + url;
+                // if(url.startsWith("https://gateway.ipfs.io/ipfs/ipfs")) return "https://gateway.ipfs.io/ipfs/" + url.split('/ipfs/ipfs/')[1]
+
+    useEffect(()=>{
+       myFunc()
+    }, [props.nfts]);
+
+const myFunc = async() =>{
+  
+   let promises = props.nfts.map(async (nft) => {
+    let  url = fixURL(nft.token_uri)
+   // console.log(url)
+    //console.log(nft)
+     try{
+     let response = await fetch(url);
+     let data = await response.json();
+     return data
+    } catch (error) {console.log(error)}
+    
+ }
+   
+ )
+ let promises1= Promise.all(promises)
+ promises1.then(results => {
+    console.log(results) 
+   return setToRender(results)
+    }).catch(e=>console.log(e))
+
+}
+
+
+    const fixURL = (url) =>{
+        if(url.startsWith('ipfs')){
+            return "https://ipfs.moralis.io:2053/ipfs" + url.split("ipfs://ipfs/").slice(-1)[0];
+        }
+        else{
+            return url+"?format=json"
+        }
+    }
+
+
+
+    /  const fetchNfts = async() => {
+        
+        //         try{
+        //             // console.log(await Web3Api.Web3API.getNFTTransfers({
+        //             //     address:"0x257453aecd1f401feb1c09882d26fbd8d8354c89"
+        //             // }))
+        //             const data = await Web3Api.account.getNFTs({
+        //             address:"0xce90a7949bb78892f159f428d0dc23a8e3584d75"
+        //             });
+        //             if(firstUpdate.current) {
+        //                 firstUpdate.current=false;
+        //                 return 
+        //             }
+        //            // console.log(data)
+        //             let fixedData1 = data.result.filter(nft=> nft.hasOwnProperty("token_uri" && "metadata"))
+        //             console.log(fixedData1)
+        //             let fixedData =  fixedData1.filter(nft => {
+        //                 return nft.token_uri!==null && nft.metadata!== null && nft.metadata.name!==null && nft.metadata.description
+        //             })
+        //             console.log(fixedData)
+        //             setFirstQuery(fixedData)
+        //             //console.log(nfts)
+                    
+        //                 } catch (e){
+        //                 console.log(e);
+        //             }
+        //     }  
+        
+        
+        
+        //     useEffect(()=>{
+        //        console.log(firstQuery)
+        //         myFunc()
+        //      }, [firstQuery]);
+         
+        
+        
+        
+        
+        //      const myFunc = async() =>{
+          
+        //         let promises = firstQuery.map(async (nft) => {
+        //          let  url = fixURL(nft.token_uri)
+        //         // console.log(url)
+        //          //console.log(nft)
+        //           try{
+        //           let response = await fetch(url);
+        //           let data = await response.json();
+        //           return data
+        //          } catch (error) {console.log(error)}
+                 
+        //       }
+                
+        //       )
+        //       let promises1= Promise.all(promises)
+        //       promises1.then(results => {
+                  
+        //         return setNftBalances(results)
+        //          }).catch(e=>console.log(e))
+             
+        //      }
+        //<button className="btn btn-outline my-10 bg-sky-400 max-w-xs w-1/6" onClick={fetchNfts}>Fetch Nfts</button>
+             
+        //          const fixURL = (url) =>{
+        //              if(url.startsWith('ipfs')){
+        //                  return "https://ipfs.moralis.io:2053/ipfs" + url.split("ipfs://ipfs/").slice(-1)[0];
+        //              }
+        //              else{
+        //                  return url+"?format=json"
+        //              }
+        //          }
+
+    const fixURL1 = (url) => {
+        if (url.startsWith("ipfs")) {
+            return "https://ipfs.moralis.io:2053/ipfs/" + url.split("ipfs://").slice(-1)[0]
+        } 
+    }
+   
+    return (
+        
+        <>
+        
+        {/* <button onClick={displayNfts}>display NFTBalances</button> */}
+
+        {toRender && toRender.map((nft, i) =>(
+            <div key={i} className="card w-72 card-bordered card-compact lg:card-normal">
+            <figure>
+                <img src={fixURL1(nft.image)} alt="nftimg" />
+            </figure> 
+            <div className="card-body">
+                <h2 className="card-title">{nft.name}</h2> 
+                <p>{nft.description}</p>
+            </div>
+            </div>
+        ))}
+        
+          
+      </>
+    
+    )
+}
+
+export default RenderData
+
+{/* <div className="flex flex-col items-center md:block">
+                <div className="grid grid-cols-auto-fit gap-10 mx-10">
+                    <RenderData fetchNfts={fetchNfts} nfts={nfts}/>
+                </div>
+
+                
+                <div>
+                    {error && <>{JSON.stringify(error)}</>}
+                    <button onClick={() => getNFTBalances({ params: { address: "0x257453aecd1f401feb1c09882d26fbd8d8354c89" } })}>Refetch NFTBalances</button>
+                    <pre>{JSON.stringify(data, null, 2)}</pre>
+                </div>
+            </div> */}
+
+                                 {/* <button className="btn btn-outline my-10 bg-sky-400 max-w-xs w-1/6" onClick={fetchNfts}>Fetch NFTs</button> */}
