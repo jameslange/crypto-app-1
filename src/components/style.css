@@ -1,0 +1,76 @@
+.wrapper {
+  perspective: 10px;
+}
+
+.homeHeader {
+  transform-style: preserve-3d;
+  z-index: -1;
+}
+.active {
+  border-bottom: 3px solid #825d11;
+  color: #82714e;
+}
+
+.background {
+  transform: translateZ(-10px) scale(2.1);
+  margin: 0;
+
+  z-index: -1;
+}
+
+.parallax {
+  background-image: url("../assets/pics/earth.jpg");
+}
+
+.foreground {
+  transform: translateZ(-5px) scale(1.5);
+  z-index: -1;
+}
+
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20vh);
+  visibility: hidden;
+  transition: opacity 1200ms ease-out, transform 600ms ease-out, visibility 1200ms ease-out;
+  will-change: opacity, transform, visibility;
+}
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}
+
+.homeGradient {
+  background: rgb(95, 100, 127);
+  background: linear-gradient(
+    90deg,
+    rgba(95, 100, 127, 1) 38%,
+    rgba(115, 140, 113, 0.6194852941176471) 75%,
+    rgba(126, 128, 50, 1) 100%
+  );
+}
+
+.homeGradient1 {
+  background: rgb(126, 128, 50);
+  background: linear-gradient(
+    90deg,
+    rgba(126, 128, 50, 1) 10%,
+    rgba(115, 140, 113, 0.8631827731092436) 25%,
+    rgba(95, 100, 127, 1) 95%
+  );
+}
+
+.walletGradient {
+  background: rgb(34, 193, 195);
+  background: linear-gradient(338deg, rgba(34, 193, 195, 1) 0%, rgba(253, 187, 45, 1) 100%);
+}
+
+.renderGradient {
+  background-image: linear-gradient(to top, #9890e3 0%, #b1f4cf 100%);
+}
+
+.balanceGradient {
+  background-image: radial-gradient(73% 147%, #eadfdf 59%, #ece2df 100%),
+    radial-gradient(91% 146%, rgba(255, 255, 255, 0.5) 47%, rgba(0, 0, 0, 0.5) 100%);
+  background-blend-mode: screen;
+}

@@ -4,7 +4,6 @@ import React,{useState} from 'react'
 const AddCollector = ({ walletData, setWalletData}) => {
     const [name, setName] = useState('');
     const [wallet, setWallet] = useState('');
-   // const [collector, setCollector] =useState([])
 
     return (
         <div className="form-control w-3/6 flex flex-col items-center ">

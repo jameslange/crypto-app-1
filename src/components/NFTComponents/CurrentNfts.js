@@ -1,64 +1,49 @@
-import React,{useEffect, useState} from 'react'
+import React, { useEffect, useState } from "react";
 
-import { useMoralis } from "react-moralis";
-import NftFocus from './NftFocus';
+import NftFocus from "./NftFocus";
 import Overlay from "react-overlay-component";
-import RenderData from './RenderData';
+import RenderData from "./RenderData";
+import { useMoralis } from "react-moralis";
+function CurrentNfts({ currentItems }) {
+  const [focusedNft, setFocusedNft] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const { Moralis, isInitialized } = useMoralis();
+  const [isOpen, setOverlay] = useState(false);
 
-function CurrentNfts({currentItems}) {
-  
-    const { Moralis, isInitialized, ...rest } = useMoralis();
-    const [focusedNft, setFocusedNft] = useState({})
+  const closeOverlay = () => {
+    setOverlay(false);
+    setTimeout(() => {
+      setFocusedNft({});
+    }, 500);
+  };
+  useEffect(() => {
+    if (isInitialized) {
+      Moralis.initPlugins();
+    }
+    // eslint-disable-next-line no-use-before-define
+  }, []);
 
-    const [isOpen, setOverlay] = useState(false);
-    const closeOverlay = () => setOverlay(false);
+  const configs = {
+    animate: true,
+    // top: `5em`,
+    clickDismiss: true,
+    escapeDismiss: true,
+    focusOutline: true,
+  };
 
-    const configs = {
-        animate: true,
-        // top: `5em`,
-        // clickDismiss: false,
-        // escapeDismiss: false,
-        // focusOutline: false,
-    };
-
-    useEffect(()=>{
-        if(isInitialized){
-         Moralis.initPlugins();
-        }
-    },[]);
-    
-    // useEffect(()=>{
-
-    //   let res =  currentItems.map(async(nft)=>{
-           
-    //     try{let curr = await Moralis.Plugins.opensea.getAsset({
-    //             network: 'mainnet',
-    //             tokenAddress: nft.token_address,
-    //             tokenId: nft.token_id,
-    //           });
-    //           console.log(curr)
-    //         }catch(e){console.log(e)}
-    //     })
-    //     console.log(res)
-    // }, [currentItems])
-
-
-   
-
-    
-    
-    return (
-        
-        <>
-            <RenderData currentItems={currentItems} Moralis={Moralis} setOverlay={setOverlay} setFocusedNft={setFocusedNft}/>
-
-            <Overlay configs={configs} isOpen={isOpen} closeOverlay={closeOverlay}>
-                 <NftFocus focusedNft={focusedNft}/>
-            </Overlay>
-       
-        </>
-    )
+  return (
+    <>
+      <RenderData
+        currentItems={currentItems}
+        setOverlay={setOverlay}
+        setFocusedNft={setFocusedNft}
+        setIsLoading={setIsLoading}
+      />
+      <Overlay configs={configs} isOpen={isOpen} closeOverlay={closeOverlay} Moralis={Moralis}>
+        {isLoading ? "loading" : <NftFocus focusedNft={focusedNft} />}
+      </Overlay>
+    </>
+  );
 }
 
-export default CurrentNfts
-
+export default CurrentNfts;
