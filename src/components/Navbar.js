@@ -55,11 +55,11 @@ const Navbar = () => {
               Dropdown
             </div>
             <ul tabindex="0" class="p-2 shadow menu dropdown-content bg-base-100 rounded-box w-52">
-              <NavLink to="/crypto-app-1" className="btn btn-ghost btn-sm rounded-btn">
-                <li className="text-gray-700">Home</li>
+              <NavLink to="/crypto-app-1" className="btn btn-ghost text-palBrown btn-sm rounded-btn">
+                <li>Home</li>
               </NavLink>
-              <NavLink to="searchnftsbywallet" className="btn btn-ghost btn-sm rounded-btn">
-                <li className="text-gray-700">Search By Wallet</li>
+              <NavLink to="searchnftsbywallet" className="btn btn-ghost text-bg-palBrown btn-sm rounded-btn">
+                <li>Search By Wallet</li>
               </NavLink>
             </ul>
           </div>

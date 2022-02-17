@@ -20,12 +20,11 @@ function CurrentNfts({ currentItems }) {
     if (isInitialized) {
       Moralis.initPlugins();
     }
-    // eslint-disable-next-line no-use-before-define
+    // eslint-disable-next-line
   }, []);
 
   const configs = {
     animate: true,
-    // top: `5em`,
     clickDismiss: true,
     escapeDismiss: true,
     focusOutline: true,

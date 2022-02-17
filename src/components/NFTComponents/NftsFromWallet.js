@@ -3,12 +3,12 @@ import AddCollector from "./AddCollector";
 import Collectors from "./Collectors";
 import TokenBalance from "../TokenComponents/TokenBalance";
 import { useNFTBalances } from "react-moralis";
-
 import initialWallets from "../../assets/data";
 import PaginatedItems from "./PaginatedItems";
 import useWalletData from "../../hooks/useWalletData";
 import useCryptoBalances from "../../hooks/useCryptoBalances";
 import "../style.css";
+import useScroll from "../../hooks/useScroll";
 
 const NftsFromWallet = () => {
   const { getNFTBalances, data } = useNFTBalances();
@@ -21,9 +21,9 @@ const NftsFromWallet = () => {
   const [walletData, setWalletData] = useWalletData(initialWallets);
   const [itemOffset, setItemOffset] = useState(0);
 
-  const [getBalances, fetchERC20Balances, nativeToken, balance, tokenData] = useCryptoBalances({ address });
+  const [scrollUp, executeScroll] = useScroll();
 
-  //const [wallets, setWallets] = useState([])
+  const [getBalances, fetchERC20Balances, nativeToken, balance, tokenData] = useCryptoBalances({ address });
 
   const [nftOrCurrencies, setNftOrCurrencies] = useState(false);
 
@@ -34,10 +34,13 @@ const NftsFromWallet = () => {
     }
     console.log(data);
 
+    //retrieve NFTs if there are more than 500
+
     if (data && data.total > nftBalances.length) {
       getNFTBalances({
         params: { address: address, offset: pageRequestNum },
       });
+      //remove items which lack proper data
       let filteredData = data.result.filter((nft) => nft.metadata !== null || nft.token_uri !== null);
       setNftBalances([...nftBalances, ...filteredData]);
       setPageRequestNum(pageRequestNum + 500);
@@ -49,6 +52,7 @@ const NftsFromWallet = () => {
     setNftOrCurrencies(!nftOrCurrencies);
   };
 
+  //reset previous search and begin new search
   function fetchNftClick() {
     setPageRequestNum(500);
     setNftBalances([]);
@@ -61,9 +65,6 @@ const NftsFromWallet = () => {
   function fetchCoinsClick() {
     getBalances();
     fetchERC20Balances();
-    console.log(nativeToken);
-    console.log(balance);
-    console.log(tokenData);
   }
 
   return (
@@ -74,7 +75,7 @@ const NftsFromWallet = () => {
           <AddCollector setWalletData={setWalletData} walletData={walletData} />
           <Collectors walletData={walletData} setAddress={setAddress} />
           <button
-            className="btn btn-outline my-10 bg-sky-400 max-w-xs w-1/6"
+            className="btn btn-outline my-10 bg-sky-400 max-w-sm md:w-1/6 "
             onClick={nftOrCurrencies ? fetchCoinsClick : fetchNftClick}
           >
             {nftOrCurrencies ? "Fetch Tokens" : "Fetch NFTs"}
@@ -97,6 +98,8 @@ const NftsFromWallet = () => {
             itemsPerPage={20}
             itemOffset={itemOffset}
             setItemOffset={setItemOffset}
+            scrollUp={scrollUp}
+            executeScroll={executeScroll}
           />
         )}
       </div>

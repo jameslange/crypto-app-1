@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useVerifyMetadata } from "../../hooks/useVerifyMetadata";
 import nftpic from "../../assets/pics/nft.png";
+import { BallTriangle } from "react-loader-spinner";
 
 function RenderData({ currentItems, setOverlay, setIsLoading, setFocusedNft, Moralis }) {
   const { verifyMetadata } = useVerifyMetadata();
@@ -45,7 +46,9 @@ function RenderData({ currentItems, setOverlay, setIsLoading, setFocusedNft, Mor
       {currentItems &&
         currentItems.map((nft, i) => {
           nft = verifyMetadata(nft);
-          console.log(nft);
+          if (!nft) {
+            return;
+          }
 
           let address = nft.token_address;
           let ID = nft.token_id;
@@ -56,9 +59,9 @@ function RenderData({ currentItems, setOverlay, setIsLoading, setFocusedNft, Mor
               onClick={() => {
                 handleClick(address, ID);
               }}
-              className="card max-h-96 min-h-[20rem] aspect-[1/1.5] hover:bottom-4 relative card-bordered rounded-3xl shadow-2xl card-compact lg:card-normal cursor-pointer bg-palSilver"
+              className="card max-h-96 min-h-[23rem] aspect-[1/1.5] hover:bottom-4 relative card-bordered rounded-3xl shadow-2xl pb-3 card-compact lg:card-normal cursor-pointer bg-palSilver"
             >
-              <figure className={loaded ? "h-4/5 object-contain" : "loading"}>
+              <figure className="h-4/5 object-contain">
                 <img
                   className="w-full max-h-full"
                   src={(nft.image && fixURL(nft.image)) || (nft.metadata && fixURL(nft.metadata.image_url))}
@@ -70,10 +73,10 @@ function RenderData({ currentItems, setOverlay, setIsLoading, setFocusedNft, Mor
                   }}
                 />
               </figure>
-              <div className="card-body shadow-inner bg-blue-100 ">
-                <h2 className="card-title flex justify-center align-middle pb-5">
+              <div className="card-body shadow-inner ">
+                <h3 className="card-title flex justify-center align-middle ">
                   {(nft.metadata && nft.metadata.name) || (nft.name && nft.name)}
-                </h2>
+                </h3>
               </div>
             </div>
           );

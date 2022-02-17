@@ -3,14 +3,12 @@ import "./index.js";
 import React from "react";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
-    
- 
-
       <BrowserRouter>
         <Navbar />
         <Routes>

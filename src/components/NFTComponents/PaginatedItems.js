@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import CurrentNfts from "./CurrentNfts";
 import ReactPaginate from "react-paginate";
-import useScroll from "../../hooks/useScroll";
 import "../style.css";
 function PaginatedItems({
   itemOffset,
@@ -12,9 +11,11 @@ function PaginatedItems({
   nftBalances,
   currentItems,
   setCurrentItems,
+  scrollUp,
+  executeScroll,
 }) {
   const [pageCount, setPageCount] = useState(0);
-  const [scrollUp, executeScroll] = useScroll();
+
   const firstUpdate = useRef(true);
 
   useEffect(() => {
@@ -28,11 +29,11 @@ function PaginatedItems({
     console.log(currentItems);
     setCurrentItems(nftBalances.slice(itemOffset, endSlice));
     setPageCount(Math.ceil(nftBalances.length / itemsPerPage));
-    // eslint-disable-next-line no-use-before-define
+    // eslint-disable-next-line
   }, [itemOffset, itemsPerPage, nftBalances]);
 
   const handlePageClick = (event) => {
-    console.log("hi");
+    // console.log("hi");
     let offset = document.documentElement.scrollTop + window.innerHeight;
     if (offset + 1 >= document.documentElement.offsetHeight) {
       executeScroll();
@@ -44,8 +45,8 @@ function PaginatedItems({
   };
 
   return (
-    <div className="">
-      <div ref={scrollUp} className="flex w-full py-10 ">
+    <div ref={scrollUp} className="">
+      <div className="flex w-full py-10 ">
         <ReactPaginate
           pageClassName="btn btn-xs md:btn-sm"
           className=" btn-group mx-auto"
