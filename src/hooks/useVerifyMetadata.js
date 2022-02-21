@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useIPFS } from "./useIPFS";
 
 /**
- * This is a hook that loads the NFT metadata in case it doesn't alreay exist
- * If metadata is missing, the object is replaced with a reactive object that updatees when the data becomes available
+ * This is a hook that loads the NFT metadata in case it doesn't already exist
+ * If metadata is missing, the object is replaced with a reactive object that updates when the data becomes available
  * The hook will retry until request is successful (with OpenSea, for now)
  */
 export const useVerifyMetadata = () => {
