@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/crypto-app-1/static/css/main.80fb3c8c.chunk.css",
-    "main.js": "/crypto-app-1/static/js/main.460bdf24.chunk.js",
-    "main.js.map": "/crypto-app-1/static/js/main.460bdf24.chunk.js.map",
+    "main.css": "/crypto-app-1/static/css/main.d42a851b.chunk.css",
+    "main.js": "/crypto-app-1/static/js/main.7ca113ce.chunk.js",
+    "main.js.map": "/crypto-app-1/static/js/main.7ca113ce.chunk.js.map",
     "runtime-main.js": "/crypto-app-1/static/js/runtime-main.01164643.js",
     "runtime-main.js.map": "/crypto-app-1/static/js/runtime-main.01164643.js.map",
     "static/css/2.14e22870.chunk.css": "/crypto-app-1/static/css/2.14e22870.chunk.css",
-    "static/js/2.93186e80.chunk.js": "/crypto-app-1/static/js/2.93186e80.chunk.js",
-    "static/js/2.93186e80.chunk.js.map": "/crypto-app-1/static/js/2.93186e80.chunk.js.map",
+    "static/js/2.a3fe1175.chunk.js": "/crypto-app-1/static/js/2.a3fe1175.chunk.js",
+    "static/js/2.a3fe1175.chunk.js.map": "/crypto-app-1/static/js/2.a3fe1175.chunk.js.map",
     "static/js/3.73c66f25.chunk.js": "/crypto-app-1/static/js/3.73c66f25.chunk.js",
     "static/js/3.73c66f25.chunk.js.map": "/crypto-app-1/static/js/3.73c66f25.chunk.js.map",
     "index.html": "/crypto-app-1/index.html",
     "static/css/2.14e22870.chunk.css.map": "/crypto-app-1/static/css/2.14e22870.chunk.css.map",
-    "static/css/main.80fb3c8c.chunk.css.map": "/crypto-app-1/static/css/main.80fb3c8c.chunk.css.map",
-    "static/js/2.93186e80.chunk.js.LICENSE.txt": "/crypto-app-1/static/js/2.93186e80.chunk.js.LICENSE.txt",
+    "static/css/main.d42a851b.chunk.css.map": "/crypto-app-1/static/css/main.d42a851b.chunk.css.map",
+    "static/js/2.a3fe1175.chunk.js.LICENSE.txt": "/crypto-app-1/static/js/2.a3fe1175.chunk.js.LICENSE.txt",
     "static/media/MutantApe4942.9dbbdb44.png": "/crypto-app-1/static/media/MutantApe4942.9dbbdb44.png",
     "static/media/boredape3749.d0305edf.png": "/crypto-app-1/static/media/boredape3749.d0305edf.png",
     "static/media/boredape9361.ad7cfae6.png": "/crypto-app-1/static/media/boredape9361.ad7cfae6.png",
@@ -25,8 +25,8 @@
   "entrypoints": [
     "static/js/runtime-main.01164643.js",
     "static/css/2.14e22870.chunk.css",
-    "static/js/2.93186e80.chunk.js",
-    "static/css/main.80fb3c8c.chunk.css",
-    "static/js/main.460bdf24.chunk.js"
+    "static/js/2.a3fe1175.chunk.js",
+    "static/css/main.d42a851b.chunk.css",
+    "static/js/main.7ca113ce.chunk.js"
   ]
 }
