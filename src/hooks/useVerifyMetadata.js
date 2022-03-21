@@ -37,7 +37,7 @@ export const useVerifyMetadata = () => {
       return;
     }
     //Get Metadata
-    fetch(NFT.token_uri)
+    fetch(`https://workaround-proxy.herokuapp.com/${NFT.token_uri}`)
       .then((res) => res.json())
       .then((metadata) => {
         if (!metadata) {
