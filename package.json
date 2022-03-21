@@ -1,6 +1,6 @@
 {
   "name": "crypto-app1",
-  "homepage": "https://jameslange.github.io/crypto-app-1/",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
