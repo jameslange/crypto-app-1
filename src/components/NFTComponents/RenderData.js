@@ -46,9 +46,7 @@ function RenderData({ currentItems, setOverlay, setIsLoading, setFocusedNft, Mor
       {currentItems &&
         currentItems.map((nft, i) => {
           nft = verifyMetadata(nft);
-          if (!nft) {
-            return;
-          }
+          
 
           let address = nft.token_address;
           let ID = nft.token_id;
